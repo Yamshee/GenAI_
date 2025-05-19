@@ -35,21 +35,8 @@ from dotenv import load_dotenv
 from azure.identity import DefaultAzureCredential, get_bearer_token_provider
 import httpx
 
-# Define the authentication URL and credentials.
-auth = "https://api.uhg.com/oauth2/token"
-#Note: Stage HCP App Identity will not support for production gateway. 
-#auth = "https://api-stg.uhg.com/oauth2/token"
-scope = "https://api.uhg.com/.default"
-grant_type = "client_credentials"
-
 # Use an asynchronous client to make a POST request to the auth URL.
 async with httpx.AsyncClient() as client:
-    body = {
-        "grant_type": grant_type,
-        "scope": scope,
-        "client_id": "34275fd4-927c-432b-ab68-6e266e70edac",
-        "client_secret": "kWqfVToGKx1rIzAFDLsxfWUhhv96rl5V0Ft",
-    }
     headers = {"Content-Type": "application/x-www-form-urlencoded"}
     resp = await client.post(auth, headers=headers, data=body, timeout=60)
     access_token = resp.json()["access_token"]
@@ -58,7 +45,7 @@ async with httpx.AsyncClient() as client:
     deployment_name = "gpt-4o_2024-11-20"
 
     # Define the Azure OpenAI endpoint and API version.
-    shared_quota_endpoint = "https://api.uhg.com/api/cloud/api-management/ai-gateway/1.0"
+    shared_quota_endpoint = "https://-------------/api/cloud/api-management/ai-gateway/1.0"
     azure_openai_api_version="2025-01-01-preview"
 
     # Initialize the OpenAI client.
@@ -68,7 +55,7 @@ async with httpx.AsyncClient() as client:
         azure_deployment=deployment_name,
         azure_ad_token=access_token,
         default_headers={
-            "projectId": "99da738c-779c-4437-b38f-b8a4b1eb9f01",
+            "projectId": "------",
             # "x-upstream-env": "nonprod" #dev
         }
     )
@@ -100,7 +87,7 @@ openai_client_embeddings = AzureOpenAIEmbeddings(
    tiktoken_model_name='cl100k_base',
         azure_ad_token=access_token,
         default_headers={ 
-            "projectId": '99da738c-779c-4437-b38f-b8a4b1eb9f01'
+            "projectId": '---------------'
         })
 
 # Get embeddings for a query.
@@ -120,7 +107,7 @@ LLM = AzureChatOpenAI(
         azure_ad_token=access_token,
         model_name='GPT-4o',
         default_headers={
-            "projectId": "99da738c-779c-4437-b38f-b8a4b1eb9f01",
+            "projectId": "---------",
             # "x-upstream-env": "nonprod" #dev
         }
     )

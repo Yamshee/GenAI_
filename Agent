@@ -103,8 +103,8 @@ LLM = AzureChatOpenAI(
         azure_ad_token=access_token,
         model_name='GPT-4o',
         default_headers={
-            "projectId": "99da738c-779c-4437-b38f-b8a4b1eb9f01",
-            # "x-upstream-env": "nonprod" #dev
+            "projectId": "",
+           
         }
     )
 

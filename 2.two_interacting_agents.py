@@ -110,7 +110,6 @@ from langchain.retrievers import TimeWeightedVectorStoreRetriever
 
 from termcolor import colored
 from langchain_experimental.generative_agents import (
-
     GenerativeAgent,
     GenerativeAgentMemory,
 )
